@@ -14,6 +14,10 @@
 ## 介绍
 node本地服务器，可快速在本地搭建服务器预览本地资源
 
+## demo
+![demo-dir](https://github.com/xudeming208/local-node-server/blob/master/public/demo-dir.png?raw=true)
+![demo-file](https://github.com/xudeming208/local-node-server/blob/master/public/demo-file.png?raw=true)
+
 ## 安装
 `
 sudo npm i local-node-server -g
@@ -23,11 +27,11 @@ sudo npm i local-node-server -g
 在需要服务器的目录下执行`server start`命令即可。如：
 
 ```javascript
-server start --ip '192.168.120.120' --port 8081 --dir '../../'
+server start --ip 192.168.120.120 --port 8081 --dir ~
 ```
 
 ```javascript
-server start --ip '192.168.120.120' --port 8081 --dir '../../index.html'
+server start --ip 192.168.120.120 --port 8081 --dir ../../index.html
 ```
 
 ## Options
@@ -36,7 +40,7 @@ server start --ip '192.168.120.120' --port 8081 --dir '../../index.html'
 -|-|-
 -h、--help | 查看帮助 | --
 -v、--version | 查看版本 | --
--i、--ip | 指定IP地址 | '0.0.0.0'
+-i、--ip | 指定IP地址 | Window: '127.0.0.1' ; Mac、Linux等: '0.0.0.0'
 -p、--port | 指定端口号 | 8080
 -d、--dir | 指定资源路径 | './'
 

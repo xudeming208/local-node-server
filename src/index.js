@@ -4,6 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const path = require('path');
+const iswin = process.platform == 'win32';
 
 const nodeopen = require('nodeopen');
 const mime = require('./mime');
@@ -15,7 +16,8 @@ const output = require('./output');
 
 // init
 const init = config => {
-	let ip = config.ip || '0.0.0.0';
+	let defaultIp = iswin ? '127.0.0.1' : '0.0.0.0';
+	let ip = config.ip || defaultIp;
 	let port = config.port || 8080;
 
 	// async await
@@ -36,7 +38,14 @@ const init = config => {
 		}
 
 		if (pathname.length > 1) {
-			dir = path.resolve(dir, pathname.substr(1));
+			let dirTemp = '';
+
+			if (isDir(dir)) {
+				dirTemp = dir;
+			} else {
+				dirTemp = path.dirname(dir);
+			}
+			dir = path.resolve(dirTemp, pathname.substr(1));
 		}
 
 		// 如果dir是文件夹的话，显示此文件夹下所有文件
