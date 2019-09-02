@@ -15,7 +15,7 @@ let stat = true;
 
 
 // Commander
-Commander.usage('<command> [options]');
+Commander.name('server').usage('<command> [options]');
 
 Commander.on('--help', function() {
 	console.log(``);
