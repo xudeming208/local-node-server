@@ -1,0 +1,43 @@
+{
+  "name": "local-node-server",
+  "version": "1.0.0",
+  "author": "xudeming",
+  "email": "xudeming208@126.com",
+  "description": "node本地服务器，可快速在本地搭建服务器预览本地资源",
+  "bin": {
+    "server": "bin/index.js"
+  },
+  "keywords": [
+    "local-node-server",
+    "local-node-serve",
+    "node-server",
+    "node-serve",
+    "nodeserver",
+    "nodeserve",
+    "node",
+    "nodejs"
+  ],
+  "scripts": {
+    "build": "babel src -d lib",
+    "watch": "npm run build -- -w"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xudeming208/local-node-server"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-runtime": "6.26.0",
+    "commander": "2.11.0",
+    "nodeopen": "0.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.6.1"
+  }
+}
