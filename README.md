@@ -42,7 +42,7 @@ server start --ip 192.168.120.120 --port 8081 --dir ../../index.html
 -v、--version | 查看版本 | --
 -i、--ip | 指定IP地址 | Window: '127.0.0.1' ; Mac、Linux等: '0.0.0.0'
 -p、--port | 指定端口号 | 8080
--d、--dir | 指定资源路径 | './'
+-d、--dir | 指定资源路径 | ./
 
 
 ## Commands
