@@ -1,6 +1,7 @@
 'use strict';
 
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const url = require('url');
 const path = require('path');
@@ -13,15 +14,32 @@ const isDir = require('./isDir');
 const readFile = require('./readFile');
 const output = require('./output');
 
-
 // init
 const init = config => {
 	let defaultIp = iswin ? '127.0.0.1' : '0.0.0.0';
 	let ip = config.ip || defaultIp;
 	let port = config.port || 8080;
 
+	// 设置协议
+	let scheme = http.createServer;
+	let schemeName = 'http';
+	switch (config.scheme) {
+		case 'https':
+			scheme = https.createServer;
+			schemeName = 'https';
+			break;
+		default:
+			scheme = http.createServer;
+			schemeName = 'http';
+	}
+
+	let options = {
+		key: fs.readFileSync(path.resolve(__dirname, '../public/privatekey.pem')),
+		cert: fs.readFileSync(path.resolve(__dirname, '../public/certificate.pem'))
+	};
+
 	// async await
-	http.createServer(async (req, res) => {
+	scheme(options, async (req, res) => {
 		let reqUrl = url.parse(req.url);
 		let hostname = reqUrl.hostname;
 		let pathname = decodeURIComponent(reqUrl.pathname);
@@ -65,12 +83,12 @@ const init = config => {
 			}
 
 			// icon路径
-			let imgPath = `http://${ip}:${port}/${path.resolve(__dirname, '..')}/public/`;
+			let imgPath = `//${ip}:${port}/${path.resolve(__dirname, '..')}/public/`;
 
 			// 遍历文件夹
 			let dirFiles = fs.readdirSync(dir);
 			dirFiles.forEach(item => {
-				let str = `<a href="http://${ip}:${port}${relativePathname}${item}">${item}</a>`;
+				let str = `<a href="//${ip}:${port}${relativePathname}${item}">${item}</a>`;
 				// 文件夹
 				if (isDir(path.resolve(dir, item))) {
 					dirArr.push(`<li class="dir"><img src="${imgPath}dir.png" />${str}</li>`);
@@ -109,7 +127,7 @@ const init = config => {
 	}).listen(port, ip, () => {
 		console.log(`Server has started on port ${port} at ${new Date().toLocaleString()}`);
 
-		nodeopen(`http://${ip}:${port}`, () => {
+		nodeopen(`${schemeName}://${ip}:${port}`, () => {
 			console.log(`browser has opened!`);
 		});
 	});
