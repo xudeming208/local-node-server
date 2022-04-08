@@ -25,7 +25,8 @@ Commander.on('--help', function() {
 	console.log(`  Examples1: server start\n`);
 	console.log(`  Examples2: server start --ip 192.168.120.111 --port 8081\n`);
 	console.log(`  Examples3: server start --dir ~\n`);
-	console.log(`  Examples4: server start --port 8082 --dir ../../index.html\n`);
+	console.log(`  Examples4: server start -p 8082 -d ../../index.html\n`);
+	console.log(`  Examples4: server start -s https -p 8082 -d /Users/demingxu`);
 });
 
 // options
@@ -35,6 +36,10 @@ Commander
 		stat = false;
 		console.log(`\nversion: ${pkg.version}\n`);
 		console.log(`Home: https://github.com/xudeming208/local-node-server\n`)
+	})
+	// 用https
+	.option('-s, --scheme <scheme>', 'set scheme', scheme => {
+		config.scheme = scheme || 'http';
 	})
 	// 指定IP地址
 	.option('-i, --ip <ip>', 'set ip', ip => {
@@ -59,7 +64,7 @@ Commander
 	});
 
 
-commandArr = ['-v', '--version', '-i', '--ip', '--port', '-p', '--dir', '-d', 'start'];
+commandArr = ['-v', '--version', '-s', '--scheme', '-i', '--ip', '-p', '--port', '-d', '--dir', 'start'];
 
 Commander.parse(process.argv);
 
