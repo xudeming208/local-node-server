@@ -19,7 +19,8 @@ const outputFile = (res, data, filename, ext) => {
 			'X-Frame-Options': 'SAMEORIGIN',
 			'X-Xss-Protection': '1; mode=block',
 			'X-Content-Type-Options': 'nosniff',
-			"Content-Type": (types[ext] ? types[ext] : 'text/plain') + ';charset=utf-8'
+			"Content-Type": (types[ext] ? types[ext] : 'text/plain') + ';charset=utf-8',
+			'Content-Length': Buffer.byteLength(data, 'utf-8')
 		};
 
 		// 特殊格式下载
