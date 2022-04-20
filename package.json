@@ -1,6 +1,6 @@
 {
   "name": "local-node-server",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "xudeming",
   "email": "xudeming208@126.com",
   "description": "node本地服务器，可快速在本地搭建服务器预览本地资源",
